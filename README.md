@@ -11,11 +11,11 @@ Tomcat 8 플랫폼을 실행하는 AWS Elastic Beanstalk 웹 서버 환경에 bu
 
 프로젝트를 clone 합니다(SSH):
 
-	~$ git clone git@github.com:awslabs/eb-tomcat-snakes.git
+	~$ git clone git@github.com:awskrug/eb-tomcat-snakes.git
 
 혹은 HTTPS 로:
 
-	~$ git clone https://github.com/awslabs/eb-tomcat-snakes.git
+	~$ git clone https://github.com/awskrug/eb-tomcat-snakes.git
 
 빌드 스크립트(``build.sh``)를 실행하여 웹 앱과 WAR 파일을 생성합니다(OS X 나 리눅스에서):
 
