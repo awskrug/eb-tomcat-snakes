@@ -3,6 +3,26 @@
 
 ## 방법
 Java 8 SDK 를 설치합니다. Java 컴파일러는 빌드 스크립트를 실행하기 위해 필요합니다.
+
+리눅스에서 설치 참고
+- Amazon Linux AMI 2018.03.0 (HVM) 사용시
+```
+sudo yum install -y java-1.8.0-openjdk-devel.x86_64
+sudo /usr/sbin/alternatives --config java
+sudo yum remove java-1.7.0-openjdk
+
+# gradle 설치
+sudo yum install gradle
+```
+
+- Ubuntu(16.04) 사용시
+```
+sudo apt-get install java-1.8.0-openjdk-devel.x86_64 -y
+
+# gradle 설치
+sudo apt-get install gradle -y
+```
+
 앱 앱을 로컬 환경에서 실행해 보려면, Tomcat 8 과 Postgresql 9.4 를 설치해야 합니다.
 
 Tomcat 8 플랫폼을 실행하는 AWS Elastic Beanstalk 웹 서버 환경에 build.sh가 생성하는 ROOT.war 아카이브를 배포 할 수 있습니다.
@@ -26,6 +46,10 @@ Tomcat 8 플랫폼을 실행하는 AWS Elastic Beanstalk 웹 서버 환경에 bu
 
 	~/eb-tomcat-snakes$ ./build-windows.sh
 
+혹은 gradle 을 사용할 경우에는:
+
+	~/eb-tomcat-snakes$ gradle build
+
 **중요**
 항상 build.sh 를 프로젝트 루트 디렉토리에서 실행하세요.
 
@@ -42,23 +66,24 @@ AWS 관리 콘솔 이나 EB CLI 를 이용해서 컴파일한 WAR 파일을 실�
 
 1. [Elastic Beanstalk Management Console](https://console.aws.amazon.com/elasticbeanstalk/home) 열기
 2. *Create New Application* 선택
-3. *Application Name* 에 **tomcat-snakes** 입력하고 *Next* 선택.
-4. *Web Server Environment* 선택
-5. 플랫폼에는 *Tomcat* 을 선택하고 *Next* 클릭.
-6. *Upload your own* 선택하고 *Choose File* 클릭.
-7. 프로젝트 최상위 폴더에서 *ROOT.war* 를 업로드하고 *Next* 클릭.
-8. 고유한 *Environment URL* 입력하고 *Next* 틀릭.
-9. *Create an RDS DB Instance with this environment* 를 체크하고 *Next* 클릭.
-10. *Instance type* 를 *t2.nano* 설정하고, *Next* 클릭. 또 한번 *Next* 클릭하여 tag 설정을 건너 뜁니다.
-11. 아래 RDS 설정을 적용하고 *Next* 를 선택합니니다(다른 항목은 기본값으로 남겨둡니다)
-    - DB engine: *postgres*
-    - Engine version: *9.4.5*
-    - Instance class: *db.t2.micro*
-    - Master username: 사용자명
-    - Master password: 암호
-
-12. 기본 역할과 인스턴스 프로파일을 사용하도록 **Next** 선택.
-13. **Launch** 선택.
+3. *Application Name* 에 **tomcat-snakes** 입력하고 *Create* 선택
+4. 애플리케이션이 생성되면, *Create One now* 클릭
+5. *Web server environment* 를 선택하고 *Select* 클릭
+6. *Environment name" 에 *tomcat-snakes* 를 입력
+7. *Domain* 에 고유한 주소(예를 들어 핸드폰번호) 입력하고 *Check availability* 클릭
+   *is available* 이 나오지 않으면, 다른 고유한 값으로 다시 입력한다.
+8. *is available* 이 보이면, *Platform* 에 *Preconfigured platform* 선택하고, *Choose a platform* 에서 *Tomcat* 을 선택
+9. *Application code* 에서 *Upload your code* 선택하고 *Upload* 클릭
+10. 프로젝트 최상위 폴더에서 *ROOT.war* 를 업로드하고 *Configure more options* 클릭
+11. *Database* 항목에서 *Modify" 클릭
+12. *Database settings* 에서 아래 RDS 설정을 적용하고 "Save" 클릭(다른 항목은 기본값으로 남겨둡니다)
+    - *Engine*을 *postgres*
+	- *Engine version* 에 *9.4.19*
+	- *Instance class* 에 *db.t2.micro*
+	- *Username* 에 *사용자명*
+	- *Password* 에 *암호* ( 8자 이상)
+	- *Retension* 에 *Delete"
+13. *Create environment* 클릭
 
 이 과정은 약 15분 정도 소요됩니다. 초기 환경 설정 중에 시간을 절약하려면 데이터베이스없이 환경을 생성한 다음, Configuration 페이지에서 추가할 수 있습니다. RDS DB 인스턴스를 시작하는데 약 10분 정도 걸립니다.
 
