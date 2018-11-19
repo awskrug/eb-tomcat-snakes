@@ -106,7 +106,7 @@ EB CLI 설치하기:
 
 RDS 데이터베이스를 포함한 환경 생성:
 
-	~/eb-tomcat-snakes$ eb create tomcat-snakes --sample --single --timeout 20 -i t2.micro --db.engine postgres --db.i db.t2.micro --db.username *사용자명* --db.password *암호*
+	~/eb-tomcat-snakes$ eb create tomcat-snakes --sample --single --timeout 20 -i t2.micro -db.engine postgres -db.i db.t2.micro -db.user *사용자명* --db.pass *암호*
 
 프로젝트 WAR 파일을 새 환경에 배포:
 
