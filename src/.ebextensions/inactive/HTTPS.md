@@ -1,9 +1,9 @@
 # HTTPS 설정 이용하기
 HTTPS를 이용하도록 설정하는 여러 방법이 있습니다. 단순한 방법은 사용 환경에서 로드 발란서를 HTTPS 접속을 끊고 HTTP로 벡엔드 인스턴스와 통신하도록 설정하는 것입니다. 이 방법을 시작하고, 인증서가 작동하는지 확인해 봅시다.
 
-만약 [AWS Certificate Manager (ACM)](https://console.aws.amazon.com/acm)를 사용할 수 있으면, 이를 사용해서 무료로 가지고 있는 도메인용으로 매니지드 인증서를 생성할 수 있습니다. 인증서를 구입했거나 셀프 사인드 인증서라면, IAM 에 인증서를 업로드 할 수 있습니다[upload it to IAM with the AWS CLI](http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/configuring-https-ssl-upload.html).
+만약 [AWS Certificate Manager (ACM)](https://console.aws.amazon.com/acm)를 사용할 수 있으면, 이를 사용해서 무료로 가지고 있는 도메인용으로 매니지드 인증서를 생성할 수 있습니다. 인증서를 구입했거나 셀프 사인드 인증서라면, [IAM 에 인증서를 업로드](http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/configuring-https-ssl-upload.html) 할 수 있습니다.
 
-HTTPS를 종료 시키는 다른 방법은 고개 인증서와 개인키가 필요합니다. 안전한 S3 버킷에 개인키를 저장하고 (인스턴스 프로파일](http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts-roles.html))에서 그 버킷과 개체를 읽을 수 있는 권한이 있도록 합니다. 이를 진행하는 가장 쉬운 방법은 Elastic Beanstalk 저장소 버킷에 키를 넣고 [개발자 가이드](http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts-roles.html#concepts-roles-instance)의 샘플 인스턴스 프로파일을 사용하는 것입니다.
+HTTPS를 종료 시키는 다른 방법은 고개 인증서와 개인키가 필요합니다. 안전한 S3 버킷에 개인키를 저장하고 [인스턴스 프로파일](http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts-roles.html))에서 그 버킷과 개체를 읽을 수 있는 권한이 있도록 합니다. 이를 진행하는 가장 쉬운 방법은 Elastic Beanstalk 저장소 버킷에 키를 넣고 [개발자 가이드](http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts-roles.html#concepts-roles-instance)의 샘플 인스턴스 프로파일을 사용하는 것입니다.
 
 각각의 방법을 활성화하는 다른 조합으로 사용하도록 7개의 환경 파일([`src/.ebextensions/inactive`](https://github.com/awslabs/eb-tomcat-snakes/blob/master/src/.ebextensions/inactive/))을 제공합니다.
 
