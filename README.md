@@ -82,7 +82,7 @@ AWS 관리 콘솔 이나 EB CLI 를 이용해서 컴파일한 WAR 파일을 실�
 	- *Instance class* 에 *db.t2.micro*
 	- *Username* 에 *사용자명*
 	- *Password* 에 *암호* ( 8자 이상)
-	- *Retension* 에 *Delete"
+	- *Retension* 에 *Delete*
 13. *Create environment* 클릭
 
 이 과정은 약 15분 정도 소요됩니다. 초기 환경 설정 중에 시간을 절약하려면 데이터베이스없이 환경을 생성한 다음, Configuration 페이지에서 추가할 수 있습니다. RDS DB 인스턴스를 시작하는데 약 10분 정도 걸립니다.
@@ -192,8 +192,8 @@ SSH 종료:
 	    │   ├── lib         - 라이브러리(.JAR 파일. JSP, Servlet API, Jasper, Log4J, PostgreSQL)
 	    │   ├── tags        - 헤더 태그 파일
 	    │   │   └── header.tag
-	    │   ├── tlds        - ListMovies 심플 태그를 위한 테그 라이브러시 설명
-	    │   │   └── movies.tld
+	    │   ├── tlds        - ListMovies 심플 태그를 위한 테그 라이브러리 디스크립터
+	    │   │   └── movies.tld
 	    │   ├── log4j2.xml  - Log4J 환경설정 파일
 	    │   └── web.xml     - 배포 설명 파일
 	    ├── com
