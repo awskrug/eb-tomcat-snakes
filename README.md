@@ -1,4 +1,4 @@
-# eb-tomcat-snakes
+# eb-tomcat-snakes(http://bit.ly/eb-handson)
 본 Tomcat 애플리케이션은 AWS Elastic Beanstalk 환경에서 J2EE 애플리케이션이 RDS를 사용하는 방법을 보여줍니다. 이 프로젝트에는 서블릿, JSP, 심플 태그(simple tag) 지원, 태그 파일(tag file), JDBC, SQL, Log4J, 부트스트랩(Bootstrap), Jackson 과 Elastic Beanstalk 환경 파일들이 포함되어 있습니다.
 
 ## 방법
