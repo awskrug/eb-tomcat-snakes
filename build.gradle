@@ -19,18 +19,7 @@ dependencies {
   providedCompile(
     'javax.servlet.jsp:javax.servlet.jsp-api:2.3.1',
     'javax.servlet:javax.servlet-api:3.1.0',
-    'org.apache.tomcat:tomcat-jasper:8.0.23'
-  )
-  compile(
-    'org.apache.logging.log4j:log4j-api:2.4',
-    'org.apache.logging.log4j:log4j-core:2.4',
-    'org.apache.logging.log4j:log4j-web:2.4',
-    'com.fasterxml.jackson.core:jackson-core:2.6.4',
-    'com.fasterxml.jackson.core:jackson-annotations:2.6.4',
-    'com.fasterxml.jackson.core:jackson-databind:2.6.4',
-  )
-  runtime(
-    'org.postgresql:postgresql:9.4-1201-jdbc4',
+    'org.apache.tomcat:tomcat-jasper:8.0.23',
     'org.apache.logging.log4j:log4j-api:2.4',
     'org.apache.logging.log4j:log4j-core:2.4',
     'org.apache.logging.log4j:log4j-web:2.4',
