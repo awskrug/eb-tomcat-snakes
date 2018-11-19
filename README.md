@@ -183,11 +183,11 @@ SSH 종료:
 	├── build.sh            - 빌드 스크립트
 	└── src
 	    ├── .ebextensions   - Elastic Beanstalk 환경 설정 파일
-	    ├── 404.jsp         - 404 error JSP
-	    ├── add.jsp         - Add a Movie JSP
-	    ├── default.jsp     - Home Page JSP
-	    ├── movies.jsp      - Movies JSP
-	    ├── search.jsp      - Search JSP
+	    ├── 404.jsp         - 404 오류 JSP
+	    ├── add.jsp         - 영화 추가 JSP
+	    ├── default.jsp     - 홈 페이지 JSP
+	    ├── movies.jsp      - 영화 목록 JSP
+	    ├── search.jsp      - 영화 검색 JSP
 	    ├── WEB-INF
 	    │   ├── lib         - 라이브러리(.JAR 파일. JSP, Servlet API, Jasper, Log4J, PostgreSQL)
 	    │   ├── tags        - 헤더 태그 파일
@@ -208,7 +208,7 @@ SSH 종료:
 	    ├── css             - 스타일 시트
 	    │   ├── movies.html - 스타일 변화를 테스트 하기 위한 HTML 페이지
 	    │   └── snakes.css  - 사용자 스타일
-	    ├── images          - 헤더와 프론트를 위한 무료 사용 이미
+	    ├── images          - 헤더와 프론트를 위한 무료 사용 이미지
 	    └── js              - 부트스트랩과 시차 효과를 위한 자바 스크립트
   
 ### build.sh
