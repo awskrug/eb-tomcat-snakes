@@ -75,8 +75,8 @@ AWS 관리 콘솔 이나 EB CLI 를 이용해서 컴파일한 WAR 파일을 실�
 8. *is available* 이 보이면, *Platform* 에 *Preconfigured platform* 선택하고, *Choose a platform* 에서 *Tomcat* 을 선택
 9. *Application code* 에서 *Upload your code* 선택하고 *Upload* 클릭
 10. 프로젝트 최상위 폴더에서 *ROOT.war* 를 업로드하고 *Configure more options* 클릭
-11. *Database* 항목에서 *Modify" 클릭
-12. *Database settings* 에서 아래 RDS 설정을 적용하고 "Save" 클릭(다른 항목은 기본값으로 남겨둡니다)
+11. *Database* 항목에서 *Modify* 클릭
+12. *Database settings* 에서 아래 RDS 설정을 적용하고 *Save* 클릭(다른 항목은 기본값으로 남겨둡니다)
     - *Engine*을 *postgres*
 	- *Engine version* 에 *9.4.19*
 	- *Instance class* 에 *db.t2.micro*
