@@ -34,19 +34,23 @@ sudo apt-get install gradle -y
 1. cmd 창 관리자 권한으로 실행
 2. https://chocolatey.org/docs/installation 접속
 3. 아래 실행 (Install with cmd.exe 로 검색)
-   @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
+	@"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
 4. https://chocolatey.org/packages/awscli 접속
-5. ``choco install awscli`` 실행
-   (업데이트는 나중에)
+5. awscli 설치. 다음을 실행(업데이트는 나중에)
+
+	choco install awscli
 6. cmd 창을 관리자 권한으로 새로 실행 후 aws 라고 치면 명령어가 먹는걸 확인할 수 있음.
    (그래야 설치한 것이 AWS 그대로 먹힘)
 7. 파이썬 설치 (CMD 창에서 실행)
-   ``choco install python3``
+
+	choco install python3
 8. eb-CLI 설치
-   ``pip install awsebcli --upgrade --user``
+
+	pip install awsebcli --upgrade --user
 9. 한번 더 CMD 새로 실행
 10. eb 실행해서 정상 설치되었는지 확인
-   ``eb``
+
+	eb
    
 이외에 윈도우 환경에서 git-bash 설치는 https://blog.hanumoka.net/2018/05/16/git-20180516-git-install-on-windows/ 를 참고하도록 합시다.
 
