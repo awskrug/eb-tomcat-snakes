@@ -14,9 +14,11 @@ Java 8 SDK 를 설치합니다. Java 컴파일러는 빌드 스크립트를 실�
 ```
 sudo yum install -y java-1.8.0-openjdk-devel.x86_64
 sudo /usr/sbin/alternatives --config java
+
+# 기존 jdk 1.7 이 설치되어 있는 경우 삭제
 sudo yum remove java-1.7.0-openjdk
 
-# gradle 설치
+# gradle 사용시 설치
 sudo yum install gradle
 ```
 
@@ -24,7 +26,7 @@ sudo yum install gradle
 ```
 sudo apt-get install openjdk-8-jdk -y
 
-# gradle 설치
+# gradle 사용시 설치
 sudo apt-get install gradle -y
 ```
 
@@ -32,22 +34,21 @@ sudo apt-get install gradle -y
 1. cmd 창 관리자 권한으로 실행
 2. https://chocolatey.org/docs/installation 접속
 3. 아래 실행 (Install with cmd.exe 로 검색)
-@"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
+   @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
 4. https://chocolatey.org/packages/awscli 접속
-5. choco install awscli 실행
-(업데이트는 나중에)
+5. ``choco install awscli`` 실행
+   (업데이트는 나중에)
 6. cmd 창을 관리자 권한으로 새로 실행 후 aws 라고 치면 명령어가 먹는걸 확인할 수 있음.
-(그래야 설치한 것이 AWS 그대로 먹힘)
+   (그래야 설치한 것이 AWS 그대로 먹힘)
 7. 파이썬 설치 (CMD 창에서 실행)
-choco install python3
+   ``choco install python3``
 8. eb-CLI 설치
-pip install awsebcli --upgrade --user
+   ``pip install awsebcli --upgrade --user``
 9. 한번 더 CMD 새로 실행
-10. eb 클릭 해서 정상 설치되었는지 확인
-
-앱 앱을 로컬 환경에서 실행해 보려면, Tomcat 8 과 Postgresql 9.4 를 설치해야 합니다.
-
-Tomcat 8 플랫폼을 실행하는 AWS Elastic Beanstalk 웹 서버 환경에 build.sh가 생성하는 ROOT.war 아카이브를 배포 할 수 있습니다.
+10. eb 실행해서 정상 설치되었는지 확인
+   ``eb``
+   
+이외에 윈도우 환경에서 git-bash 설치는 https://blog.hanumoka.net/2018/05/16/git-20180516-git-install-on-windows/ 를 참고하도록 합시다.
 
 ### 프로젝트 다운로드, 빌드, 배포
 
@@ -74,6 +75,10 @@ Tomcat 8 플랫폼을 실행하는 AWS Elastic Beanstalk 웹 서버 환경에 bu
 
 **중요**
 항상 build.sh 를 프로젝트 루트 디렉토리에서 실행하세요.
+
+### 로컬에서 실행?
+
+본 웹 애플리케이션을 로컬 환경에서 실행해 보려면, Tomcat 8 혹은 8.5 와 Postgresql 9.4 를 설치해야 합니다.
 
 빌드 스크립트는 프로젝트를 컴파일하고 필요한 파일을 웹 아카이브(.WAR 파일)로 묶고, 로컬 환경 테스트를 위해 WAR 파일을 ``/Library/Tomcat`` 에 복사합니다. Tomcat을 다른 위치에 설치했다면, ``build.sh`` 에서 경로를 바꾸세요:
 
