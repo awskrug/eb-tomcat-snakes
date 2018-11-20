@@ -9,8 +9,8 @@
 ## 방법
 Java 8 SDK 를 설치합니다. Java 컴파일러는 빌드 스크립트를 실행하기 위해 필요합니다.
 
-리눅스에서 설치 참고
-- Amazon Linux AMI 2018.03.0 (HVM) 사용시
+* 리눅스에서 설치 참고
+- RedHat 계열(Amazon Linux, CentOS 등) 사용시
 ```
 sudo yum install -y java-1.8.0-openjdk-devel.x86_64
 sudo /usr/sbin/alternatives --config java
@@ -20,13 +20,30 @@ sudo yum remove java-1.7.0-openjdk
 sudo yum install gradle
 ```
 
-- Ubuntu(16.04) 사용시
+- Ubuntu 계열 사용시
 ```
 sudo apt-get install openjdk-8-jdk -y
 
 # gradle 설치
 sudo apt-get install gradle -y
 ```
+
+* 윈도우 사용시 설치 참고
+1. cmd 창 관리자 권한으로 실행
+2. https://chocolatey.org/docs/installation 접속
+3. 아래 실행 (Install with cmd.exe 로 검색)
+@"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
+4. https://chocolatey.org/packages/awscli 접속
+5. choco install awscli 실행
+(업데이트는 나중에)
+6. cmd 창을 관리자 권한으로 새로 실행 후 aws 라고 치면 명령어가 먹는걸 확인할 수 있음.
+(그래야 설치한 것이 AWS 그대로 먹힘)
+7. 파이썬 설치 (CMD 창에서 실행)
+choco install python3
+8. eb-CLI 설치
+pip install awsebcli --upgrade --user
+9. 한번 더 CMD 새로 실행
+10. eb 클릭 해서 정상 설치되었는지 확인
 
 앱 앱을 로컬 환경에서 실행해 보려면, Tomcat 8 과 Postgresql 9.4 를 설치해야 합니다.
 
@@ -105,7 +122,7 @@ EB CLI 설치하기:
 혹시 awscli 가 설치되어 있다면, 아래 명령어로 표시되는 리전을 기억하고,
 
     ~/eb-tomcat-snakes$ aws configure get region
-	ap-northeast-2
+    ap-northeast-2
 
 위에 나온 ``ap-northeast-2`` 를 아래처럼 ``eb init --region `` 추가 파라미터로 입력합니다.
 
@@ -123,14 +140,16 @@ EB CLI 설치하기:
 RDS 데이터베이스를 포함한 환경 생성(진행 과정을 보여줍니다):
 
 	~/eb-tomcat-snakes$ eb create tomcat-snakes -d -p tomcat-8.5-java-8 \
-	--sample --single --timeout 40 -i t2.micro \
+	--sample --single --timeout 20 -i t2.micro \
 	-db.engine postgres -db.i db.t2.micro -db.user *사용자명* -db.pass *암호*
 
-위 과정 진행 중에 timedout 발생 했다면, [Elastic Beanstalk Management Console](https://console.aws.amazon.com/elasticbeanstalk/home)에서 **Rebuild Environment** 로 재생성하시면 됩니다(좀 더 빨리 생성됩니다).
+위 과정 진행 중에 timedout 발생 했다면, [Elastic Beanstalk Management Console](https://console.aws.amazon.com/elasticbeanstalk/home)에서 **Rebuild Environment**로 'tomcat-snakes' 환경을 재생성하시면 됩니다(좀 더 빨리 생성됩니다).
 
 프로젝트 WAR 파일을 새 환경에 배포:
 
 	~/eb-tomcat-snakes$ eb deploy --staged
+
+**문제 해결**: 위에 명령어로 배포하는데 ``ERROR: InvalidParameterValueError - Environment named tomcat-snakes is in an invalid state for this operation. Must be Ready.``이러한 오류 메시지를 보셨다면, tomcat-snakes 의 EC2 인스턴스가 Running 상태가 아니어서 발생합니다. 너무 빨리 진행하신 것으로 조금 더 기다리시면 좋겠습니다. 환경 생성 과정에서 충분히 기다렸음에도(20분 이상) 오류 메시지가 발생하는 경우에는 timedout 문제입니다. [Elastic Beanstalk Management Console](https://console.aws.amazon.com/elasticbeanstalk/home)에서 **Rebuild Environment**로 'tomcat-snakes' 환경을 재생성하시면 됩니다(좀 더 빨리 생성됩니다).
 
 브라우저에서 생성된 환경 열어 보기(맥 환경이 아니라면 권장하지 않습니다):
 
@@ -251,3 +270,17 @@ WAR 파일에는 해당 앱의 실행에 필요한 파일들만 포함됩니다.
 ### 고급 기능
 
 HTTPS와 로드발란서를 연동하는 다양한 방법에 대해서는 [HTTPS.md](src/.ebextensions/inactive/HTTPS.md)를 참고하시기 바랍니다.
+
+### 종료
+
+생성한 Beanstalk 환경과 애플리케이션을 삭제합니다. AWS 계정을 추가하였다면 IAM 에서 계정을 삭제합니다.
+
+환경 삭제:
+
+    ~/eb-tomcat-snakes$ eb terminate
+
+애플리케이션 삭제:
+1. [Elastic Beanstalk Management Console](https://console.aws.amazon.com/elasticbeanstalk/home?application/overview?applicationName=eb-tomcat-snakes)을 엽니다.
+2. **eb-tomcat-snakes** 에 있는 **Actions** 에서 **Delete application** 선택
+
+AWS 계정을 추가하였다면 [IAM](https://console.aws.amazon.com/iam/home?region=ap-northeast-2)에서 추가한 계정을 삭제합니다.
