@@ -22,7 +22,7 @@ sudo yum install gradle
 
 - Ubuntu(16.04) 사용시
 ```
-sudo apt-get install java-1.8.0-openjdk-devel.x86_64 -y
+sudo apt-get install openjdk-8-jdk -y
 
 # gradle 설치
 sudo apt-get install gradle -y
@@ -102,24 +102,46 @@ EB CLI 설치하기:
 
 프로젝트 저장소 초기화하기:
 
-	~/eb-tomcat-snakes$ eb init
+혹시 awscli 가 설치되어 있다면, 아래 명령어로 표시되는 리전을 기억하고,
+
+    ~/eb-tomcat-snakes$ aws configure get region
+	ap-northeast-2
+
+위에 나온 ``ap-northeast-2`` 를 아래처럼 ``eb init --region `` 추가 파라미터로 입력합니다.
+
+    ~/eb-tomcat-snakes$ eb init --region ap-northeast-2
+
+처음 수행한다면, 다음과 같이 진행합니다.
+
+    ~/eb-tomcat-snakes$ eb init
 
 ``.elasticbeanstalk/config.yml``에 아래 내용 추가:
 
 	deploy:
 	  artifact: ROOT.war
 
-RDS 데이터베이스를 포함한 환경 생성:
+RDS 데이터베이스를 포함한 환경 생성(진행 과정을 보여줍니다):
 
-	~/eb-tomcat-snakes$ eb create tomcat-snakes --sample --single --timeout 20 -i t2.micro -db.engine postgres -db.i db.t2.micro -db.user *사용자명* -db.pass *암호*
+	~/eb-tomcat-snakes$ eb create tomcat-snakes -d -p tomcat-8.5-java-8 \
+	--sample --single --timeout 40 -i t2.micro \
+	-db.engine postgres -db.i db.t2.micro -db.user *사용자명* -db.pass *암호*
+
+위 과정 진행 중에 timedout 발생 했다면, [Elastic Beanstalk Management Console](https://console.aws.amazon.com/elasticbeanstalk/home)에서 **Rebuild Environment** 로 재생성하시면 됩니다(좀 더 빨리 생성됩니다).
 
 프로젝트 WAR 파일을 새 환경에 배포:
 
 	~/eb-tomcat-snakes$ eb deploy --staged
 
-브라우저에서 생성된 환경 열어 보기:
+브라우저에서 생성된 환경 열어 보기(맥 환경이 아니라면 권장하지 않습니다):
 
 	~/eb-tomcat-snakes$ eb open
+
+올려진 웹 사이트를 확인하시려면, 다음 명령어로 생성한 URL을 확인합니다.
+
+	~/eb-tomcat-snakes$ eb status | grep CNAME
+	CNAME: tomcat-snakes.kbjqhiyz98.ap-northeast-2.elasticbeanstalk.com
+
+에서 위에 경우에는, ``tomcat-snakes.kbjqhiyz98.ap-northeast-2.elasticbeanstalk.com`` 입니다. 이 주소를 브라우저에서 열어 보면, 배포된 애플리케이션을 확인할 수 있습니다.
 
 ## 사이트 기능
 
@@ -225,3 +247,7 @@ SSH 종료:
 WAR 파일에는 해당 앱의 실행에 필요한 파일들만 포함됩니다. 컴파일하지 않은 java 클래스나 ``.ebextensions/inactive`` 에 있는 설정 파일은 제외됩니다.
 
 윈도우 버전 스크립트(``build-windows.sh``)도 포함되어 있다. classpath 인자들이 콜론(:)이 아니라 세미콜론(;)으로 구분되어 있다.
+
+### 고급 기능
+
+HTTPS와 로드발란서를 연동하는 다양한 방법에 대해서는 [HTTPS.md](src/.ebextensions/inactive/HTTPS.md)를 참고하시기 바랍니다.

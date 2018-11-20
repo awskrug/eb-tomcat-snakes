@@ -3,7 +3,8 @@ apply plugin: 'war'
 war {
   archiveName = 'ROOT.war'
   webAppDirName = file('src')
-  rootSpec.exclude("**/com/")
+  exclude('src/WEB-INF/lib/*.jar')
+  exclude('**/com')
   destinationDir = file("$rootDir")
 }
 
@@ -12,5 +13,5 @@ sourceSets {
 }
 
 dependencies {
-  compile fileTree(include: ['*.jar'], dir: 'src/WEB-INF/lib')
+  providedCompile fileTree(include: ['*.jar'], dir: 'src/WEB-INF/lib')
 }
